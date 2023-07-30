@@ -21,6 +21,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.javatuples:javatuples:1.2'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -32,5 +33,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'algorithm.practice.App'
+    mainClass = 'luke.algorithm.practice.App'
 }

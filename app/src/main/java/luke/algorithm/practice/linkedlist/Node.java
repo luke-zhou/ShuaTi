@@ -1,10 +1,12 @@
 package luke.algorithm.practice.linkedlist;
 
+import org.javatuples.Pair;
+
 import java.util.HashSet;
 
 public class Node {
     Node next = null;
-    int data;
+    public int data;
 
     public Node(int d) {
         data = d;
@@ -42,7 +44,7 @@ public class Node {
     }
 
     public int[] toArray(){
-        int size = this.size();
+        int size = size();
         int[] a = new int[size];
         int i = 0;
         Node current = this;
@@ -54,6 +56,10 @@ public class Node {
         return a;
     }
 
+    /*
+     * Remove Dups:
+     * Write code to remove duplicates from an unsorted linked list.
+     */
     public void removeDup(){
         HashSet set = new HashSet<Integer>();
         Node previous = null;
@@ -66,6 +72,48 @@ public class Node {
                 previous = current;
             }
             current = current.next;
+        }
+    }
+
+    /*
+     * Return Kth to Last:
+     * Implement an algorithm to find the kth to last element of a singly linked list.
+     * Iteration Solution
+     * the last one, k = 1
+     * the second last, k = 2
+     */
+    public Node lastKth(int k){
+        int size = size();
+        Node current = this;
+        for (int i = 0; i < size - k; i++){
+            current = current.next;
+        }
+        return current;
+    }
+
+    /*
+     * Return Kth to Last:
+     * Implement an algorithm to find the kth to last element of a singly linked list.
+     * Recursive Solution
+     * the last one, k = 1
+     * the second last, k = 2
+     */
+    public Node lastKth2(int k){
+        Pair<Integer, Node> result = recursiveThrough(k);
+        return result.getValue1();
+    }
+
+    private Pair<Integer, Node> recursiveThrough(int k){
+        if (this.next == null){
+            return new Pair<>(1, this);
+        }else{
+            Pair<Integer, Node> result = this.next.recursiveThrough(k);
+            if (result.getValue0().equals(k)){
+                return result;
+            }else{
+                return new Pair<>(result.getValue0()+1, this);
+            }
+
         }
     }
 }
