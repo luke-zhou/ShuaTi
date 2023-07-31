@@ -50,4 +50,18 @@ public class NodeTest {
         assertEquals(6, testNode.lastKth2(3).data);
         assertEquals(1, testNode.lastKth2(8).data);
     }
+
+    @Test
+    public void remove() {
+        int[] a = {1,2,3,4,5,6,7,8};
+        Node list = Node.create(a);
+        Node n = list.next.next;
+        list.remove(n);
+        int[] expected = {1,2,4,5,6,7,8};
+        assertArrayEquals(expected, list.toArray());
+        n = list.next.next;
+        list.remove(n);
+        int[] expected2 = {1,2,5,6,7,8};
+        assertArrayEquals(expected2, list.toArray());
+    }
 }

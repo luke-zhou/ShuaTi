@@ -3,9 +3,10 @@ package luke.algorithm.practice.linkedlist;
 import org.javatuples.Pair;
 
 import java.util.HashSet;
+import java.util.Objects;
 
 public class Node {
-    Node next = null;
+    public Node next = null;
     public int data;
 
     public Node(int d) {
@@ -20,10 +21,10 @@ public class Node {
         }
     }
 
-    public static Node create(int[] a){
+    public static Node create(int[] a) {
         Node preHead = new Node(0);
         Node current = preHead;
-        for (int i : a){
+        for (int i : a) {
             Node n = new Node(i);
             current.next = n;
             current = n;
@@ -32,10 +33,10 @@ public class Node {
         return preHead.next;
     }
 
-    public int size(){
+    public int size() {
         int size = 1;
         Node current = this.next;
-        while (current != null){
+        while (current != null) {
             size++;
             current = current.next;
         }
@@ -43,12 +44,12 @@ public class Node {
         return size;
     }
 
-    public int[] toArray(){
+    public int[] toArray() {
         int size = size();
         int[] a = new int[size];
         int i = 0;
         Node current = this;
-        while (current != null){
+        while (current != null) {
             a[i++] = current.data;
             current = current.next;
         }
@@ -60,14 +61,14 @@ public class Node {
      * Remove Dups:
      * Write code to remove duplicates from an unsorted linked list.
      */
-    public void removeDup(){
+    public void removeDup() {
         HashSet set = new HashSet<Integer>();
         Node previous = null;
         Node current = this;
-        while (current != null){
-            if(set.contains(current.data)){
+        while (current != null) {
+            if (set.contains(current.data)) {
                 previous.next = current.next;
-            }else{
+            } else {
                 set.add(current.data);
                 previous = current;
             }
@@ -82,10 +83,10 @@ public class Node {
      * the last one, k = 1
      * the second last, k = 2
      */
-    public Node lastKth(int k){
+    public Node lastKth(int k) {
         int size = size();
         Node current = this;
-        for (int i = 0; i < size - k; i++){
+        for (int i = 0; i < size - k; i++) {
             current = current.next;
         }
         return current;
@@ -98,22 +99,36 @@ public class Node {
      * the last one, k = 1
      * the second last, k = 2
      */
-    public Node lastKth2(int k){
+    public Node lastKth2(int k) {
         Pair<Integer, Node> result = recursiveThrough(k);
         return result.getValue1();
     }
 
-    private Pair<Integer, Node> recursiveThrough(int k){
-        if (this.next == null){
+    private Pair<Integer, Node> recursiveThrough(int k) {
+        if (this.next == null) {
             return new Pair<>(1, this);
-        }else{
+        } else {
             Pair<Integer, Node> result = this.next.recursiveThrough(k);
-            if (result.getValue0().equals(k)){
+            if (result.getValue0().equals(k)) {
                 return result;
-            }else{
-                return new Pair<>(result.getValue0()+1, this);
+            } else {
+                return new Pair<>(result.getValue0() + 1, this);
             }
 
         }
+    }
+
+    /*
+     * Delete Middle Node:
+     * Implement an algorithm to delete a node in the middle (i.e., any node but
+     * the first and last node, not necessarily the exact middle) of a singly linked list, given only access to
+     * that node.
+     * EXAMPLE
+     * Input:the node c from the linked list a->b->c->d->e->f
+     * Result: nothing is returned, but the new linked list looks like a->b->d->e->f
+     */
+    public void remove(Node n) {
+        n.data = n.next.data;
+        n.next = n.next.next;
     }
 }
