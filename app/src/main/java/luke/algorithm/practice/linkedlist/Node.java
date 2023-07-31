@@ -2,6 +2,7 @@ package luke.algorithm.practice.linkedlist;
 
 import org.javatuples.Pair;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -130,5 +131,40 @@ public class Node {
     public void remove(Node n) {
         n.data = n.next.data;
         n.next = n.next.next;
+    }
+
+    /*
+     * Partition: Write code to partition a linked list around a value x, such that all nodes less than x come
+     * before all nodes greater than or equal to x. If x is contained within the list the values of x only need
+     * to be after the elements less than x (see below). The partition element x can appear anywhere in the
+     * "right partition"; it does not need to appear between the left and right partitions.
+     * EXAMPLE
+     * Input:3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1 [partition= 5]
+     * Output:3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+     */
+    public Node partition(int p) {
+        Node left = new Node(0);
+        Node leftCurrent = left;
+        Node right = new Node(p);
+        Node rightCurrent = right;
+        Node current = this;
+        while(current != null){
+            if (current.data < p){
+                leftCurrent.next = current;
+                leftCurrent = current;
+                rightCurrent.next = null;
+            }else{
+                rightCurrent.next = current;
+                rightCurrent = current;
+                leftCurrent.next = null;
+            }
+
+            current = current.next;
+        }
+//        System.out.println(Arrays.toString(left.toArray()));
+//        System.out.println(Arrays.toString(right.toArray()));
+
+        leftCurrent.next = right.next;
+        return left.next;
     }
 }

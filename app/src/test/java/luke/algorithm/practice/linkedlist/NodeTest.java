@@ -1,10 +1,13 @@
 package luke.algorithm.practice.linkedlist;
+
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+
 public class NodeTest {
     @Test
     public void removeDupNoDups() {
-        int[] a = {1,2,3,4,5};
+        int[] a = {1, 2, 3, 4, 5};
         Node testNode = Node.create(a);
         testNode.removeDup();
         assertEquals(5, testNode.size());
@@ -13,17 +16,17 @@ public class NodeTest {
 
     @Test
     public void removeDupDups() {
-        int[] a = {1,2,2,4,5};
+        int[] a = {1, 2, 2, 4, 5};
         Node testNode = Node.create(a);
         testNode.removeDup();
         assertEquals(4, testNode.size());
-        int[] expected = {1,2,4,5};
+        int[] expected = {1, 2, 4, 5};
         assertArrayEquals(expected, testNode.toArray());
     }
 
     @Test
     public void removeDupMultiDups() {
-        int[] a = {2,2,2,2,2};
+        int[] a = {2, 2, 2, 2, 2};
         Node testNode = Node.create(a);
         testNode.removeDup();
         assertEquals(1, testNode.size());
@@ -33,7 +36,7 @@ public class NodeTest {
 
     @Test
     public void lastKthIter() {
-        int[] a = {1,2,3,4,5,6,7,8};
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
         Node testNode = Node.create(a);
         assertEquals(8, testNode.lastKth(1).data);
         assertEquals(7, testNode.lastKth(2).data);
@@ -43,7 +46,7 @@ public class NodeTest {
 
     @Test
     public void lastKthRecursive() {
-        int[] a = {1,2,3,4,5,6,7,8};
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
         Node testNode = Node.create(a);
         assertEquals(8, testNode.lastKth2(1).data);
         assertEquals(7, testNode.lastKth2(2).data);
@@ -53,15 +56,24 @@ public class NodeTest {
 
     @Test
     public void remove() {
-        int[] a = {1,2,3,4,5,6,7,8};
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
         Node list = Node.create(a);
         Node n = list.next.next;
         list.remove(n);
-        int[] expected = {1,2,4,5,6,7,8};
+        int[] expected = {1, 2, 4, 5, 6, 7, 8};
         assertArrayEquals(expected, list.toArray());
         n = list.next.next;
         list.remove(n);
-        int[] expected2 = {1,2,5,6,7,8};
+        int[] expected2 = {1, 2, 5, 6, 7, 8};
         assertArrayEquals(expected2, list.toArray());
+    }
+
+    @Test
+    public void partition() {
+        int[] a = {3, 5, 8, 5, 10, 2, 1};
+        Node list = Node.create(a);
+        Node result = list.partition(5);
+        int[] expected = {3, 2, 1, 5, 8, 5, 10};
+        assertArrayEquals(expected, result.toArray());
     }
 }
