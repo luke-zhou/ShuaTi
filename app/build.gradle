@@ -35,3 +35,13 @@ application {
     // Define the main class for the application.
     mainClass = 'luke.algorithm.practice.App'
 }
+
+tasks.named('test', Test) {
+    useJUnit()
+
+    maxHeapSize = '1G'
+
+    testLogging {
+        events "passed"
+    }
+}
