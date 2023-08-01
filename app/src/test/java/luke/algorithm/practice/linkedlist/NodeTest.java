@@ -120,4 +120,36 @@ public class NodeTest {
         int[] expected = {3, 2, 2, 0, 9, 1, 2};
         assertArrayEquals(expected, result.toArray());
     }
+
+    @Test
+    public void isPalindromeFalse() {
+        int[] a = {3, 2, 1, 2, 6, 1, 7};
+        Node nodeA = Node.create(a);
+        assertFalse(nodeA.isPalindrome());
+        int[] b = {8, 2, 9, 5};
+        nodeA = Node.create(b);
+        assertFalse(nodeA.isPalindrome());
+        int[] c = {6, 1, 7};
+        nodeA = Node.create(c);
+        assertFalse(nodeA.isPalindrome());
+        int[] d = {1, 2, 3, 3, 2, 1, 6, 7, 8, 9, 9, 8, 7};
+        nodeA = Node.create(d);
+        assertFalse(nodeA.isPalindrome());
+    }
+
+    @Test
+    public void isPalindromeTrue() {
+        int[] a = {3, 2, 1, 1, 1, 2, 3};
+        Node nodeA = Node.create(a);
+        assertTrue(nodeA.isPalindrome());
+        int[] b = {6, 2, 2, 6};
+        nodeA = Node.create(b);
+        assertTrue(nodeA.isPalindrome());
+        int[] c = {1, 1, 1};
+        nodeA = Node.create(c);
+        assertTrue(nodeA.isPalindrome());
+        int[] d = {1, 2, 3, 3, 2, 1, 6, 1, 2, 3, 3, 2, 1};
+        nodeA = Node.create(d);
+        assertTrue(nodeA.isPalindrome());
+    }
 }

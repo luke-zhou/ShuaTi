@@ -5,6 +5,7 @@ import org.javatuples.Pair;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Stack;
 
 public class Node {
     public Node next = null;
@@ -246,4 +247,31 @@ public class Node {
 
         return preResult.next;
     }
+
+    /*
+     * Palindrome:
+     * Implement a function to check if a linked list is a palindrome
+     */
+    public boolean isPalindrome() {
+        Node slow = this;
+        Node fast = this;
+        Stack<Integer> s = new Stack<>();
+        while (fast != null && fast.next != null){
+            s.push(slow.data);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null){
+            slow = slow.next;
+        }
+        while (slow!=null){
+            if (slow.data != s.pop()){
+                return false;
+            }
+            slow = slow.next;
+        }
+
+        return true;
+    }
+
 }
