@@ -148,12 +148,12 @@ public class Node {
         Node right = new Node(p);
         Node rightCurrent = right;
         Node current = this;
-        while(current != null){
-            if (current.data < p){
+        while (current != null) {
+            if (current.data < p) {
                 leftCurrent.next = current;
                 leftCurrent = current;
                 rightCurrent.next = null;
-            }else{
+            } else {
                 rightCurrent.next = current;
                 rightCurrent = current;
                 leftCurrent.next = null;
@@ -166,5 +166,84 @@ public class Node {
 
         leftCurrent.next = right.next;
         return left.next;
+    }
+
+    /*
+     * Sum Lists:
+     * You have two numbers represented by a linked list, where each node contains a single
+     * digit. The digits are stored in reverse order,such that the 1's digit is at the head of the list. Write a
+     * function that adds the two numbers and returns the sum as a linked list.
+     * EXAMPLE
+     * Input: (7-> 1 -> 6) + (5 -> 9 -> 2).That is,617 + 295.
+     * Output: 2 -> 1 -> 9. That is,912.
+     */
+    public static Node sumReverse(Node n1, Node n2) {
+        Node n1c = n1;
+        Node n2c = n2;
+        Node left = null;
+        int addition = 0;
+        Node preResult = new Node(0);
+        Node current = preResult;
+        while (true) {
+            if (n1c == null) {
+                left = n2c;
+                break;
+            }
+            if (n2c == null) {
+                left = n1c;
+                break;
+            }
+            int result = n1c.data + n2c.data + addition;
+            addition = result / 10;
+            current.next = new Node(result % 10);
+            n1c = n1c.next;
+            n2c = n2c.next;
+            current = current.next;
+        }
+
+        if (left != null) {
+            left.data += addition;
+            current.next = left;
+        }
+
+        return preResult.next;
+    }
+
+    /*
+     * Sum Lists:
+     * You have two numbers represented by a linked list, where each node contains a single
+     * digit. The digits are stored in forward order,such that the 1's digit is at the head of the list. Write a
+     * function that adds the two numbers and returns the sum as a linked list.
+     * EXAMPLE
+     * Input: (6-> 1 -> 7) + (2 -> 9 -> 5).That is,617 + 295.
+     * Output: 9 -> 1 -> 2. That is,912.
+     */
+    public static Node sumForward(Node n1, Node n2) {
+        int len1 = n1.size();
+        int len2 = n2.size();
+        Node preResult = new Node(0);
+        Node current = preResult;
+        Node longList = (len1 > len2) ? n1 : n2;
+        Node shortList = (len1 > len2) ? n2 : n1;
+        int longLen = Math.max(len1, len2);
+        int shortLen = Math.min(len1, len2);
+        while (longLen != shortLen) {
+            current.next = longList;
+            current = longList;
+            longList = longList.next;
+            longLen--;
+        }
+        while (longLen > 0) {
+            int result = longList.data + shortList.data;
+            int addition = result / 10;
+            current.data += addition;
+            current.next = new Node(result % 10);
+            longList = longList.next;
+            shortList = shortList.next;
+            current = current.next;
+            longLen--;
+        }
+
+        return preResult.next;
     }
 }

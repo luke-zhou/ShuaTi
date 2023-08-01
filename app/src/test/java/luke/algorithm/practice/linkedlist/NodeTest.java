@@ -76,4 +76,48 @@ public class NodeTest {
         int[] expected = {3, 2, 1, 5, 8, 5, 10};
         assertArrayEquals(expected, result.toArray());
     }
+
+    @Test
+    public void sumReverseSameLength() {
+        int[] a = {7, 1, 6};
+        int[] b = {5, 9, 2};
+        Node nodeA = Node.create(a);
+        Node nodeB = Node.create(b);
+        Node result = Node.sumReverse(nodeA, nodeB);
+        int[] expected = {2, 1, 9};
+        assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void sumReverseDiffLength() {
+        int[] a = {7, 1, 6, 2, 1, 2, 3};
+        int[] b = {5, 9, 2, 8};
+        Node nodeA = Node.create(a);
+        Node nodeB = Node.create(b);
+        Node result = Node.sumReverse(nodeA, nodeB);
+        int[] expected = {2, 1, 9, 0, 2, 2, 3};
+        assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void sumForwardSameLength() {
+        int[] a = {6, 1, 7};
+        int[] b = {2, 9, 5};
+        Node nodeA = Node.create(a);
+        Node nodeB = Node.create(b);
+        Node result = Node.sumForward(nodeA, nodeB);
+        int[] expected = {9, 1, 2};
+        assertArrayEquals(expected, result.toArray());
+    }
+
+    @Test
+    public void sumForwardDiffLength() {
+        int[] a = {3, 2, 1, 2, 6, 1, 7};
+        int[] b = {8, 2, 9, 5};
+        Node nodeA = Node.create(a);
+        Node nodeB = Node.create(b);
+        Node result = Node.sumForward(nodeA, nodeB);
+        int[] expected = {3, 2, 2, 0, 9, 1, 2};
+        assertArrayEquals(expected, result.toArray());
+    }
 }
