@@ -152,4 +152,28 @@ public class NodeTest {
         nodeA = Node.create(d);
         assertTrue(nodeA.isPalindrome());
     }
+
+    @Test
+    public void hasIntersectionTrue() {
+        int[] a = {1, 2, 3, 4, 5, 6, 7};
+        Node nodeA = Node.create(a);
+        int[] b = {8,9,10};
+        Node nodeB = Node.create(b);
+        nodeB.next.next.next = nodeA.next.next.next;
+        assertTrue(Node.hasIntersection(nodeA, nodeB));
+        Node nodeC = nodeA.next.next.next;
+        assertTrue(Node.hasIntersection(nodeA, nodeC));
+        Node nodeD = nodeA.last();
+        assertTrue(Node.hasIntersection(nodeA, nodeD));
+    }
+
+    @Test
+    public void hasIntersectionFalse() {
+        int[] a = {1, 2, 3, 4, 5, 6, 7};
+        Node nodeA = Node.create(a);
+        int[] b = {8,9,10};
+        Node nodeB = Node.create(b);
+
+        assertFalse(Node.hasIntersection(nodeA, nodeB));
+    }
 }

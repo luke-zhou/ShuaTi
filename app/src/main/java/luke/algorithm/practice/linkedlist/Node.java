@@ -256,16 +256,16 @@ public class Node {
         Node slow = this;
         Node fast = this;
         Stack<Integer> s = new Stack<>();
-        while (fast != null && fast.next != null){
+        while (fast != null && fast.next != null) {
             s.push(slow.data);
             slow = slow.next;
             fast = fast.next.next;
         }
-        if (fast != null){
+        if (fast != null) {
             slow = slow.next;
         }
-        while (slow!=null){
-            if (slow.data != s.pop()){
+        while (slow != null) {
+            if (slow.data != s.pop()) {
                 return false;
             }
             slow = slow.next;
@@ -274,4 +274,30 @@ public class Node {
         return true;
     }
 
+    public Node last() {
+        return lastKth(1);
+    }
+
+    /*
+     * Intersection:
+     * Given two (singly) linked lists, determine if the two lists intersect. Return the
+     * intersecting node. Note that the intersection is defined based on reference, not value. That is, if the
+     * kth node of the first linked list is the exact same node (by reference) as the jth node of the second
+     * linked list, then they are intersecting.
+     */
+    public static boolean hasIntersection(Node a, Node b) {
+        int lengthA = a.size();
+        int lengthB = b.size();
+        int length = Math.min(lengthA, lengthB);
+        a = a.lastKth(length);
+        b = b.lastKth(length);
+        for (int i = 0; i < length; i++) {
+            if (a == b) {
+                return true;
+            }
+            a = a.next;
+            b = b.next;
+        }
+        return false;
+    }
 }
