@@ -300,4 +300,39 @@ public class Node {
         }
         return false;
     }
+
+    /*
+     * Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+     * beginning of the loop.
+     * DEFINITION
+     * Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so
+     * as to make a loop in the linked list.
+     * EXAMPLE
+     * Input:A - > B - > C - > D - > E - > C [the same C as earlier]
+     * Output:C
+     */
+
+    public Node loopHead(){
+        Node slow = this;
+        Node fast = this;
+        Node collisionSpot = null;
+        while (fast !=null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast){
+                collisionSpot = fast;
+                break;
+            }
+        }
+
+        if (collisionSpot == null) return null;
+
+        Node head = this;
+        while(head != collisionSpot){
+            head = head.next;
+            collisionSpot = collisionSpot.next;
+        }
+
+        return head;
+    }
 }

@@ -157,7 +157,7 @@ public class NodeTest {
     public void hasIntersectionTrue() {
         int[] a = {1, 2, 3, 4, 5, 6, 7};
         Node nodeA = Node.create(a);
-        int[] b = {8,9,10};
+        int[] b = {8, 9, 10};
         Node nodeB = Node.create(b);
         nodeB.next.next.next = nodeA.next.next.next;
         assertTrue(Node.hasIntersection(nodeA, nodeB));
@@ -171,9 +171,34 @@ public class NodeTest {
     public void hasIntersectionFalse() {
         int[] a = {1, 2, 3, 4, 5, 6, 7};
         Node nodeA = Node.create(a);
-        int[] b = {8,9,10};
+        int[] b = {8, 9, 10};
         Node nodeB = Node.create(b);
 
         assertFalse(Node.hasIntersection(nodeA, nodeB));
+    }
+
+    @Test
+    public void loopHeadNull() {
+        int[] a = {1, 2, 3, 4, 5, 6, 7};
+        Node nodeA = Node.create(a);
+        assertNull(nodeA.loopHead());
+    }
+
+    @Test
+    public void loopHead() {
+        int[] a = {1, 2, 3, 4, 5, 6, 7};
+        Node nodeA = Node.create(a);
+        nodeA.last().next = nodeA;
+        assertEquals(nodeA, nodeA.loopHead());
+
+        int[] b = {1, 2, 3, 4, 5, 6, 7};
+        Node nodeB = Node.create(b);
+        nodeB.last().next = nodeB.next.next.next;
+        assertEquals(nodeB.next.next.next, nodeB.loopHead());
+
+        int[] c = {1, 2, 3, 4, 5, 6, 7, 8};
+        Node nodeC = Node.create(c);
+        nodeC.last().next = nodeC;
+        assertEquals(nodeC, nodeC.loopHead());
     }
 }
