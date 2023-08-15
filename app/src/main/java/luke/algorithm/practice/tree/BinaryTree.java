@@ -1,5 +1,11 @@
 package luke.algorithm.practice.tree;
 
+import org.checkerframework.checker.units.qual.A;
+import org.javatuples.Pair;
+import org.javatuples.Tuple;
+
+import java.util.ArrayList;
+
 public class BinaryTree {
 
     // input array is sorted asc
@@ -31,4 +37,30 @@ public class BinaryTree {
 
         return root;
     }
+
+    public static ArrayList<ArrayList<BinaryTreeNode>> getDepthList(BinaryTreeNode root){
+        ArrayList<ArrayList<BinaryTreeNode>> result = new ArrayList<>();
+        ArrayList<Pair<BinaryTreeNode, Integer>> queue = new ArrayList<>();
+        queue.add(Pair.with(root, 0));
+        while(!queue.isEmpty()){
+            Pair<BinaryTreeNode, Integer> p = queue.remove(0);
+            int depth = p.getValue1();
+            BinaryTreeNode node = p.getValue0();
+            if (depth < result.size()){
+                result.get(depth).add(node);
+            }else{
+                ArrayList<BinaryTreeNode> list = new ArrayList<>();
+                list.add(node);
+                result.add(list);
+            }
+            if(node.left != null){
+                queue.add(Pair.with(node.left, depth+1));
+            }
+            if(node.right != null){
+                queue.add(Pair.with(node.right, depth+1));
+            }
+        }
+        return result;
+    }
+
 }
