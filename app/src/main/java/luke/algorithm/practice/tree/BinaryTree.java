@@ -63,4 +63,16 @@ public class BinaryTree {
         return result;
     }
 
+    public static boolean isBalanced(BinaryTreeNode root){
+        return heightAndBalanced(root).getValue1();
+    }
+
+    private static Pair<Integer, Boolean> heightAndBalanced(BinaryTreeNode node){
+        if (node == null) return new Pair<>(0, true);
+        Pair<Integer, Boolean> left = heightAndBalanced(node.left);
+        Pair<Integer, Boolean> right = heightAndBalanced(node.right);
+        int height = Math.max(left.getValue0(), right.getValue0())+1;
+        boolean balanced = left.getValue1() && right.getValue1() && Math.abs(left.getValue0()- right.getValue0())<=1;
+        return new Pair<>(height, balanced);
+    }
 }
