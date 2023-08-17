@@ -28,7 +28,7 @@ public class BinaryTree {
             BinaryTreeNode right = new BinaryTreeNode(values[start + 2]);
             root.setLeft(left);
             root.setRight(right);
-        }else{
+        } else {
             int middleIndex = (end - start) / 2 + start;
             root = new BinaryTreeNode(values[middleIndex]);
             root.setLeft(buildMinimalBinarySearchTree(values, start, middleIndex));
@@ -38,41 +38,64 @@ public class BinaryTree {
         return root;
     }
 
-    public static ArrayList<ArrayList<BinaryTreeNode>> getDepthList(BinaryTreeNode root){
+    public static ArrayList<ArrayList<BinaryTreeNode>> getDepthList(BinaryTreeNode root) {
         ArrayList<ArrayList<BinaryTreeNode>> result = new ArrayList<>();
         ArrayList<Pair<BinaryTreeNode, Integer>> queue = new ArrayList<>();
         queue.add(Pair.with(root, 0));
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             Pair<BinaryTreeNode, Integer> p = queue.remove(0);
             int depth = p.getValue1();
             BinaryTreeNode node = p.getValue0();
-            if (depth < result.size()){
+            if (depth < result.size()) {
                 result.get(depth).add(node);
-            }else{
+            } else {
                 ArrayList<BinaryTreeNode> list = new ArrayList<>();
                 list.add(node);
                 result.add(list);
             }
-            if(node.left != null){
-                queue.add(Pair.with(node.left, depth+1));
+            if (node.left != null) {
+                queue.add(Pair.with(node.left, depth + 1));
             }
-            if(node.right != null){
-                queue.add(Pair.with(node.right, depth+1));
+            if (node.right != null) {
+                queue.add(Pair.with(node.right, depth + 1));
             }
         }
         return result;
     }
 
-    public static boolean isBalanced(BinaryTreeNode root){
+    public static boolean isBalanced(BinaryTreeNode root) {
         return heightAndBalanced(root).getValue1();
     }
 
-    private static Pair<Integer, Boolean> heightAndBalanced(BinaryTreeNode node){
+    private static Pair<Integer, Boolean> heightAndBalanced(BinaryTreeNode node) {
         if (node == null) return new Pair<>(0, true);
         Pair<Integer, Boolean> left = heightAndBalanced(node.left);
         Pair<Integer, Boolean> right = heightAndBalanced(node.right);
-        int height = Math.max(left.getValue0(), right.getValue0())+1;
-        boolean balanced = left.getValue1() && right.getValue1() && Math.abs(left.getValue0()- right.getValue0())<=1;
+        int height = Math.max(left.getValue0(), right.getValue0()) + 1;
+        boolean balanced = left.getValue1() && right.getValue1() && Math.abs(left.getValue0() - right.getValue0()) <= 1;
         return new Pair<>(height, balanced);
+    }
+
+    public static boolean isBST(BinaryTreeNode root) {
+        return isBST(root, null, null);
+    }
+
+    private static boolean isBST(BinaryTreeNode node, Integer min, Integer max) {
+        if(node == null) return true;
+
+        if(min != null && node.value< min) return false;
+        if(max != null && node.value >= max) return false;
+
+        return isBST(node.left, min, node.value) && isBST(node.right, node.value, max);
+
+    }
+
+    public static void inOrder(BinaryTreeNode node){
+        if(node == null){
+            return;
+        }
+        inOrder(node.left);
+        System.out.println(node.value);
+        inOrder(node.right);
     }
 }

@@ -153,4 +153,65 @@ public class BinaryTreeTest {
 
         assertTrue(BinaryTree.isBalanced(root));
     }
+
+    @Test
+    public void isBST1() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        assertTrue(BinaryTree.isBST(root));
+    }
+
+    @Test
+    public void isBST2() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode left1 = new BinaryTreeNode(2);
+        BinaryTreeNode right1 = new BinaryTreeNode(7);
+        root.setLeft(left1);
+        root.setRight(right1);
+        assertFalse(BinaryTree.isBST(root));
+        root.setRight(null);
+        assertFalse(BinaryTree.isBST(root));
+        root.setLeft(null);
+        BinaryTreeNode right2 = new BinaryTreeNode(-1);
+        root.setRight(right2);
+        assertFalse(BinaryTree.isBST(root));
+    }
+
+    @Test
+    public void isBST3() {
+        BinaryTreeNode root = new BinaryTreeNode(2);
+        BinaryTreeNode left1 = new BinaryTreeNode(1);
+        BinaryTreeNode right1 = new BinaryTreeNode(7);
+        root.setLeft(left1);
+        root.setRight(right1);
+        assertTrue(BinaryTree.isBST(root));
+        root.setRight(null);
+        assertTrue(BinaryTree.isBST(root));
+        root.setLeft(null);
+        root.setRight(right1);
+        assertTrue(BinaryTree.isBST(root));
+    }
+
+    @Test
+    public void isBST4() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
+        assertTrue(BinaryTree.isBST(root));
+    }
+
+    @Test
+    public void isBST5() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
+        root.right.right.left.value = -1;
+        assertFalse(BinaryTree.isBST(root));
+        root.right.right.left.value = 10;
+        root.right.left.value = -1;
+        assertFalse(BinaryTree.isBST(root));
+        root.right.left.value = 8;
+        root.left.value = -1;
+        assertFalse(BinaryTree.isBST(root));
+        root.left.value = 3;
+        root.value = -1;
+        assertFalse(BinaryTree.isBST(root));
+        root.value = 6;
+        assertTrue(BinaryTree.isBST(root));
+    }
 }
