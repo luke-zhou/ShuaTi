@@ -9,8 +9,8 @@ import static org.junit.Assert.*;
 public class BinaryTreeTest {
 
     @Test
-    public void buildMinimalBinarySearchTreeTest1(){
-        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1,2,3,4,5,6,7,8,9});
+    public void buildMinimalBinarySearchTreeTest1() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9});
         assertEquals(5, root.value);
         assertEquals(3, root.left.value);
         assertEquals(2, root.left.left.value);
@@ -23,8 +23,8 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void buildMinimalBinarySearchTreeTest2(){
-        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1,2,3,4,5,6,7,8,9,10});
+    public void buildMinimalBinarySearchTreeTest2() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
         assertEquals(6, root.value);
         assertEquals(3, root.left.value);
         assertEquals(2, root.left.left.value);
@@ -38,8 +38,8 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void buildMinimalBinarySearchTreeTest3(){
-        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1,2,3,4,5,6,7,8,9,10,11});
+    public void buildMinimalBinarySearchTreeTest3() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
         assertEquals(6, root.value);
         assertEquals(3, root.left.value);
         assertEquals(2, root.left.left.value);
@@ -54,8 +54,8 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void getDepthListTest1(){
-        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1,2,3,4,5,6,7,8,9,10,11});
+    public void getDepthListTest1() {
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
         ArrayList<ArrayList<BinaryTreeNode>> result = BinaryTree.getDepthList(root);
         assertEquals(4, result.size());
         assertArrayEquals(new int[]{6}, result.get(0).stream().mapToInt(n -> n.value).toArray());
@@ -65,7 +65,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void getDepthListTest2(){
+    public void getDepthListTest2() {
         BinaryTreeNode root = new BinaryTreeNode(1);
         BinaryTreeNode left1 = new BinaryTreeNode(2);
         BinaryTreeNode right1 = new BinaryTreeNode(7);
@@ -149,7 +149,7 @@ public class BinaryTreeTest {
 
     @Test
     public void isBalanced2() {
-        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1,2,3,4,5,6,7,8,9,10,11});
+        BinaryTreeNode root = BinaryTree.buildMinimalBinarySearchTree(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11});
 
         assertTrue(BinaryTree.isBalanced(root));
     }
@@ -213,5 +213,11 @@ public class BinaryTreeTest {
         assertFalse(BinaryTree.isBST(root));
         root.value = 6;
         assertTrue(BinaryTree.isBST(root));
+    }
+
+    @Test
+    public void display() {
+        BinaryTreeNode root = BinaryTree.buildBinarySearchTree(new int[]{20, 4, 7, 4, 2, 5, 3, 1, 6, 15, 9, 18});
+        BinaryTree.display(root);
     }
 }

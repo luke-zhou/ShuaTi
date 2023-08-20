@@ -5,6 +5,8 @@ public class BinaryTreeNode {
     public BinaryTreeNode left;
     public BinaryTreeNode right;
 
+    public BinaryTreeNode parent;
+
     public BinaryTreeNode(int value) {
         this.value = value;
     }
@@ -19,5 +21,9 @@ public class BinaryTreeNode {
 
     public void setRight(BinaryTreeNode right) {
         this.right = right;
+    }
+
+    public void setParent(BinaryTreeNode parent) {
+        this.parent = parent;
     }
 }
