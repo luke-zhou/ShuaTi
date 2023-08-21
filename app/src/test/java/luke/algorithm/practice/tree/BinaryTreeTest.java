@@ -220,4 +220,23 @@ public class BinaryTreeTest {
         BinaryTreeNode root = BinaryTree.buildBinarySearchTree(new int[]{20, 4, 7, 4, 2, 5, 3, 1, 6, 15, 9, 18});
         BinaryTree.display(root);
     }
+
+    @Test
+    public void getSuccessorFromBST() {
+        BinaryTreeNode root = BinaryTree.buildBinarySearchTree(new int[]{2, 1});
+        BinaryTreeNode result = BinaryTree.getSuccessorFromBST(root.left);
+        assertEquals(2, result.value);
+        root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25});
+        result = BinaryTree.getSuccessorFromBST(root.right);
+        assertEquals(null, result);
+        root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 37, 32, 36});
+        result = BinaryTree.getSuccessorFromBST(root.right);
+        assertEquals(32, result.value);
+        root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
+        result = BinaryTree.getSuccessorFromBST(root.right.right.left.right.right.right);
+        assertEquals(38, result.value);
+        root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
+        result = BinaryTree.getSuccessorFromBST(root.right.right.left.right.right.right.right);
+        assertEquals(33, result.value);
+    }
 }

@@ -155,4 +155,25 @@ public class BinaryTree {
         System.out.println(node.value);
         inOrder(node.right);
     }
+
+    public static BinaryTreeNode getSuccessorFromBST(BinaryTreeNode node) {
+        BinaryTreeNode result = null;
+        if (node.right != null){
+            result = node.right;
+            while(result.left != null){
+                result = result.left;
+            }
+        }else if (node.parent.right == node){
+            result = node.parent;
+            while (result.parent != null && result.parent.right == result){
+                result = result.parent;
+            }
+            result = result.parent != null && result.parent.left == result ? result : null;
+        } else {
+            result = node.parent;
+        }
+
+        return result;
+
+    }
 }
