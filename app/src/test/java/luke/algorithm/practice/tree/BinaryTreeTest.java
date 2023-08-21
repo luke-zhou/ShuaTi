@@ -237,6 +237,6 @@ public class BinaryTreeTest {
         assertEquals(38, result.value);
         root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
         result = BinaryTree.getSuccessorFromBST(root.right.right.left.right.right.right.right);
-        assertEquals(33, result.value);
+        assertEquals(40, result.value);
     }
 }

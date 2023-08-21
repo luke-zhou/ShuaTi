@@ -163,12 +163,12 @@ public class BinaryTree {
             while(result.left != null){
                 result = result.left;
             }
-        }else if (node.parent.right == node){
+        }else if (node.parent != null && node.parent.right == node){
             result = node.parent;
             while (result.parent != null && result.parent.right == result){
                 result = result.parent;
             }
-            result = result.parent != null && result.parent.left == result ? result : null;
+            result = result.parent != null && result.parent.left == result ? result.parent : null;
         } else {
             result = node.parent;
         }
