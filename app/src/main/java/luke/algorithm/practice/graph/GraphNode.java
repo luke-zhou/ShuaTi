@@ -9,7 +9,7 @@ public class GraphNode {
 
     public State state;
 
-    enum State {Unvisited, Visited;}
+    enum State {Unvisited, Visited, Visiting}
 
     public GraphNode(String name) {
         this.name = name;
