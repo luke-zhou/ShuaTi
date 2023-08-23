@@ -7,6 +7,7 @@ import org.javatuples.Tuple;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class BinaryTree {
 
@@ -20,36 +21,36 @@ public class BinaryTree {
         for (int i = 1; i < values.length; i++) {
             BinaryTreeNode parent = root;
             BinaryTreeNode target = values[i] <= parent.value ? parent.left : parent.right;
-            while(target != null){
+            while (target != null) {
                 parent = target;
                 target = values[i] <= parent.value ? parent.left : parent.right;
             }
             BinaryTreeNode node = new BinaryTreeNode(values[i]);
             node.setParent(parent);
-            if(values[i] <= parent.value){
+            if (values[i] <= parent.value) {
                 parent.left = node;
-            }else {
+            } else {
                 parent.right = node;
             }
         }
         return root;
     }
 
-    public static void display(BinaryTreeNode node){
+    public static void display(BinaryTreeNode node) {
         HashMap<BinaryTreeNode, Integer> space = new HashMap<>();
         calculateSpace(node, space);
 //        for (Map.Entry<BinaryTreeNode, Integer> entry : space.entrySet()) {
 //            System.out.println(entry.getKey().value + ": " + entry.getValue());
 //        }
         ArrayList<ArrayList<BinaryTreeNode>> depthLists = getDepthList(node);
-        for(ArrayList<BinaryTreeNode> list: depthLists){
+        for (ArrayList<BinaryTreeNode> list : depthLists) {
             StringBuilder sbLine = new StringBuilder();
             StringBuilder sb = new StringBuilder();
             sbLine.append("|");
             sb.append(list.get(0).value);
-            for(int i = 1; i < list.size(); i++){
-                int count = space.get(list.get(i-1))*5-1;
-                String link = list.get(i).parent == list.get(i-1).parent ? "-" : " ";
+            for (int i = 1; i < list.size(); i++) {
+                int count = space.get(list.get(i - 1)) * 5 - 1;
+                String link = list.get(i).parent == list.get(i - 1).parent ? "-" : " ";
                 sbLine.append(link.repeat(count));
                 sbLine.append("|");
                 sb.append(" ".repeat(count));
@@ -61,8 +62,9 @@ public class BinaryTree {
         }
 
     }
-    private static int calculateSpace(BinaryTreeNode node, HashMap<BinaryTreeNode, Integer> map){
-        if(node == null) return 0;
+
+    private static int calculateSpace(BinaryTreeNode node, HashMap<BinaryTreeNode, Integer> map) {
+        if (node == null) return 0;
 
         int space = calculateSpace(node.left, map) + calculateSpace(node.right, map);
         space = space == 0 ? 1 : space;
@@ -158,14 +160,14 @@ public class BinaryTree {
 
     public static BinaryTreeNode getSuccessorFromBST(BinaryTreeNode node) {
         BinaryTreeNode result = null;
-        if (node.right != null){
+        if (node.right != null) {
             result = node.right;
-            while(result.left != null){
+            while (result.left != null) {
                 result = result.left;
             }
-        }else if (node.parent != null && node.parent.right == node){
+        } else if (node.parent != null && node.parent.right == node) {
             result = node.parent;
-            while (result.parent != null && result.parent.right == result){
+            while (result.parent != null && result.parent.right == result) {
                 result = result.parent;
             }
             result = result.parent != null && result.parent.left == result ? result.parent : null;
@@ -175,5 +177,51 @@ public class BinaryTree {
 
         return result;
 
+    }
+
+    public static BinaryTreeNode findFirstCommonAncestor(BinaryTreeNode root, BinaryTreeNode n1, BinaryTreeNode n2) {
+        Stack<BinaryTreeNode> stack1 = new Stack<>();
+        Stack<BinaryTreeNode> stack2 = new Stack<>();
+        searchRoute(n1, root, stack1);
+        searchRoute(n2, root, stack2);
+        Stack<BinaryTreeNode> min = null;
+        Stack<BinaryTreeNode> max = null;
+        if(stack1.size() > stack2.size()){
+            max = stack1;
+            min = stack2;
+        }else {
+            max = stack2;
+            min = stack1;
+        }
+
+        while(max.size() > min.size()){
+            max.pop();
+        }
+
+        while(!max.isEmpty()){
+            BinaryTreeNode node1 = max.pop();
+            if (node1 == min.pop()){
+                return node1;
+            }
+        }
+
+        return null;
+    }
+
+    public static boolean searchRoute(BinaryTreeNode target, BinaryTreeNode start, Stack<BinaryTreeNode> path) {
+        path.push(start);
+        if (start == null) return false;
+        if (start == target) return true;
+        boolean leftResult = searchRoute(target, start.left, path);
+        boolean rightResult = false;
+        if (!leftResult) {
+            path.pop();
+            rightResult = searchRoute(target, start.right, path);
+            if (!rightResult) {
+                path.pop();
+            }
+        }
+
+        return leftResult || rightResult;
     }
 }

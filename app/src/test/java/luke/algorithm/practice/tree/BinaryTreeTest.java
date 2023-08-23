@@ -3,6 +3,8 @@ package luke.algorithm.practice.tree;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
 
 import static org.junit.Assert.*;
 
@@ -238,5 +240,23 @@ public class BinaryTreeTest {
         root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
         result = BinaryTree.getSuccessorFromBST(root.right.right.left.right.right.right.right);
         assertEquals(40, result.value);
+    }
+
+    @Test
+    public void searchRoute1(){
+        BinaryTreeNode root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        boolean result = BinaryTree.searchRoute(root.right.right.left.right.right.right, root, stack);
+        assertTrue(result);
+        System.out.println(Arrays.toString(stack.stream().map(n-> n.value).toArray()));
+    }
+
+    @Test
+    public void findFirstCommonAncestor(){
+        BinaryTreeNode root = BinaryTree.buildBinarySearchTree(new int[]{20, 10, 30, 25, 40, 33, 35, 32, 34, 36, 37, 38});
+        BinaryTreeNode result = BinaryTree.findFirstCommonAncestor(root, root.right.right.left.left, root.right.right.left.right.right.right);
+        assertEquals(33, result.value);
+        result = BinaryTree.findFirstCommonAncestor(root, root.right.left, root.right.right.left.right.right.right);
+        assertEquals(30, result.value);
     }
 }
