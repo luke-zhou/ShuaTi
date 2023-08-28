@@ -10,16 +10,22 @@ public class RandomBinaryTreeTest {
     public void build(){
         RandomBinaryTree tree = RandomBinaryTree.build(new int[]{1,2,3});
         BinaryTree.display(tree.root);
+        assertEquals(3, tree.size);
         tree = RandomBinaryTree.build(new int[]{1,2,3,4});
         BinaryTree.display(tree.root);
+        assertEquals(4, tree.size);
         tree = RandomBinaryTree.build(new int[]{1,2,3,4,5});
         BinaryTree.display(tree.root);
+        assertEquals(5, tree.size);
         tree = RandomBinaryTree.build(new int[]{1,2,3,4,5,6});
         BinaryTree.display(tree.root);
+        assertEquals(6, tree.size);
         tree = RandomBinaryTree.build(new int[]{1,2,3,4,5,6,7});
         BinaryTree.display(tree.root);
+        assertEquals(7, tree.size);
         tree = RandomBinaryTree.build(new int[]{1,2,3,4,5,6,7,8});
         BinaryTree.display(tree.root);
+        assertEquals(8, tree.size);
     }
 
     @Test

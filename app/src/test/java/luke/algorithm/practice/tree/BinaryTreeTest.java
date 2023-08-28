@@ -259,4 +259,27 @@ public class BinaryTreeTest {
         result = BinaryTree.findFirstCommonAncestor(root, root.right.left, root.right.right.left.right.right.right);
         assertEquals(30, result.value);
     }
+
+    @Test
+    public void sumPath(){
+        BinaryTreeNode root = new BinaryTreeNode(10);
+        BinaryTreeNode left = new BinaryTreeNode(5);
+        BinaryTreeNode right = new BinaryTreeNode(-3);
+        root.right = right;
+        root.left = left;
+        BinaryTreeNode lleft = new BinaryTreeNode(3);
+        BinaryTreeNode lright = new BinaryTreeNode(2);
+        left.left = lleft;
+        left.right = lright;
+        BinaryTreeNode rright = new BinaryTreeNode(11);
+        right.right = rright;
+        BinaryTreeNode llleft = new BinaryTreeNode(3);
+        BinaryTreeNode llright = new BinaryTreeNode(-2);
+        lleft.left = llleft;
+        lleft.right= llright;
+        BinaryTreeNode lrright = new BinaryTreeNode(1);
+        lright.right = lrright;
+
+        assertEquals(3,BinaryTree.sumPath(root, 8));
+    }
 }

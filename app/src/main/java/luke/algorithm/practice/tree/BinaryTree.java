@@ -224,4 +224,32 @@ public class BinaryTree {
 
         return leftResult || rightResult;
     }
+
+    public static int sumPath(BinaryTreeNode root, int target){
+        return sum(root, target).getValue1();
+    }
+
+    private static Pair<ArrayList<Integer>, Integer> sum(BinaryTreeNode node, int target){
+        ArrayList<Integer> result = new ArrayList<>();
+        int count = 0;
+        result.add(node.value);
+        if(node.right != null){
+            Pair<ArrayList<Integer>, Integer> rightSum = sum(node.right, target);
+            count += rightSum.getValue1();
+            for(int v : rightSum.getValue0()){
+                result.add(v+node.value);
+            }
+        }
+        if(node.left != null){
+            Pair<ArrayList<Integer>, Integer> leftSum = sum(node.left, target);
+            count += leftSum.getValue1();
+            for(int v : leftSum.getValue0()){
+                result.add(v+node.value);
+            }
+        }
+
+        count += (int)result.stream().filter(v -> v == target).count();
+
+        return new Pair<>(result, count);
+    }
 }
