@@ -12,4 +12,10 @@ public class BitManipulationTest {
         assertEquals(0x44c, result);
     }
 
+    @Test
+    public void flipBit(){
+        int result = BitManipulation.flipBit(0b11011101111);
+        assertEquals(8, result);
+    }
+
 }
