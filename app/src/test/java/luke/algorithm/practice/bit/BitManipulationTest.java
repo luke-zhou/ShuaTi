@@ -18,4 +18,18 @@ public class BitManipulationTest {
         assertEquals(8, result);
     }
 
+    @Test
+    public void smallestNext(){
+        int result = BitManipulation.smallestNext(0b11011001111100);
+//        System.out.println(Integer.toBinaryString(result));
+        assertEquals(0b11011010001111, result);
+    }
+
+    @Test
+    public void largestPrevious(){
+        int result = BitManipulation.largestPrevious(0b100110001110011);
+//        System.out.println(Integer.toBinaryString(result));
+        assertEquals(0b100110001101110, result);
+    }
+
 }

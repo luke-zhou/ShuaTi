@@ -30,4 +30,47 @@ public class BitManipulation {
 
         return maxLen;
     }
+
+    public static int smallestNext(int n){
+        int oneBitCount = 0;
+        int p = -1;
+        for(int i = 0; i< Integer.SIZE ; i++){
+            if ((n & 1) == 0 && oneBitCount > 0){
+                p = i;
+                break;
+            }else if ((n & 1) == 1){
+                oneBitCount ++;
+            }
+            n >>>=1;
+        }
+
+        n = n | 1;
+        n <<=p;
+        int mask = ~0;
+        mask<<=(oneBitCount-1);
+        mask = ~mask;
+        return n|mask;
+    }
+
+    public static int largestPrevious(int n){
+        int oneBitCount = 0;
+        int p = -1;
+        for(int i = 0; i< Integer.SIZE ; i++){
+            if ((n & 1) == 1 && oneBitCount < i){
+                p = i;
+                break;
+            }else if ((n & 1) == 1){
+                oneBitCount ++;
+            }
+            n >>>=1;
+        }
+
+        n = n - 1;
+        n <<=p;
+        int mask = ~0;
+        mask<<=(oneBitCount+1);
+        mask = ~mask;
+        mask <<= p-oneBitCount-1;
+        return n|mask;
+    }
 }
