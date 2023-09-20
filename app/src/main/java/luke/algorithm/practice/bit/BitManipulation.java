@@ -73,4 +73,14 @@ public class BitManipulation {
         mask <<= p-oneBitCount-1;
         return n|mask;
     }
+
+    public static int bitDiffCount(int a, int b){
+        int c = a ^ b;
+        int count = 0;
+        while (c != 0){
+            c = c & (c-1);
+            count++;
+        }
+        return count;
+    }
 }

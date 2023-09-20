@@ -32,4 +32,14 @@ public class BitManipulationTest {
         assertEquals(0b100110001101110, result);
     }
 
+    @Test
+    public void bitDiffCount(){
+        int result = BitManipulation.bitDiffCount(29, 15);
+        assertEquals(2, result);
+        result = BitManipulation.bitDiffCount(0b11111, 0b00000);
+        assertEquals(5, result);
+        result = BitManipulation.bitDiffCount(0b10101, 0b10101);
+        assertEquals(0, result);
+    }
+
 }
