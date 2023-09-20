@@ -83,4 +83,10 @@ public class BitManipulation {
         }
         return count;
     }
+
+    public static int bitwiseSwap(int a){
+        int odd = a & 0x55555555;
+        int even = a & 0xaaaaaaaa;
+        return (odd<<1 | even >>>1);
+    }
 }

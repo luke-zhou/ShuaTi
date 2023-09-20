@@ -42,4 +42,26 @@ public class BitManipulationTest {
         assertEquals(0, result);
     }
 
+    @Test
+    public void shiftTest(){
+        int number = 0x90000000;
+        System.out.println(number);
+        int result = number << 1;
+        System.out.println(Integer.toHexString(result));
+
+        number = 0x90000000;
+        int result1 = number >> 1;
+        int result2 = number >>> 1;
+        System.out.println(Integer.toHexString(result1));
+        System.out.println(Integer.toHexString(result2));
+    }
+
+    @Test
+    public void bitwiseSwap(){
+        int n = 0xaaaaaaaa;
+        assertEquals(0x55555555, BitManipulation.bitwiseSwap(n));
+    }
+
+
+
 }
