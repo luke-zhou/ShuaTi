@@ -44,16 +44,19 @@ public class BitManipulationTest {
 
     @Test
     public void shiftTest(){
-        int number = 0x90000000;
+        int number = 0xd000ffff;
         System.out.println(number);
         int result = number << 1;
         System.out.println(Integer.toHexString(result));
+        System.out.println(result);
 
         number = 0x90000000;
         int result1 = number >> 1;
         int result2 = number >>> 1;
         System.out.println(Integer.toHexString(result1));
         System.out.println(Integer.toHexString(result2));
+
+        System.out.println(Integer.toHexString(~1));
     }
 
     @Test
